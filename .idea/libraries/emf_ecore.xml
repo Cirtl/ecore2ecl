@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="emf.ecore">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../学习资料/毕业设计/项目代码/lib/org.eclipse.emf.common_2.17.0.v20190920-0401.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../学习资料/毕业设计/项目代码/lib/org.eclipse.emf.ecore.change_2.14.0.v20190528-0725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../学习资料/毕业设计/项目代码/lib/org.eclipse.emf.ecore.edit_2.13.0.v20190822-1451.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../学习资料/毕业设计/项目代码/lib/org.eclipse.emf.ecore.xmi_2.16.0.v20190528-0725.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../学习资料/毕业设计/项目代码/lib/org.eclipse.emf.ecore_2.20.0.v20190920-0401.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
