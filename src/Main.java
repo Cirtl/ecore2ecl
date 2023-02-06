@@ -1,18 +1,22 @@
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.*;
+import file.RecourceControl;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EClassImpl;
-import org.eclipse.emf.ecore.resource.*;
-import org.eclipse.emf.ecore.resource.impl.*;
-import org.eclipse.emf.ecore.xmi.impl.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        ResourceSet resourceSet = new ResourceSetImpl();
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-        Resource resource= resourceSet.getResource(URI.createFileURI("resource/ecores/basicfamily.ecore"), true);
+        EPackage ePackage = null;
+        try {
+            ePackage = RecourceControl.SINGLETON.getEcore("resource/ecores/basicfamily.ecore");
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            System.exit(0);
+        }
 
-        EPackage ePackage = (EPackage)resource.getContents().get(0);
+        assert ePackage != null;
 
         System.out.println("all non-abstract classes in ecore metamodel:\n");
         for (EClassifier classifier : ePackage.getEClassifiers()) {
