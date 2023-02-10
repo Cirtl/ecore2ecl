@@ -1,5 +1,6 @@
 package extract.tool;
 
+import extract.einfo.Connection;
 import extract.einfo.Entity;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -33,9 +34,37 @@ public abstract class Transformer {
     }
 
     public static Map<String, Object> mappingEntities(List<Entity> entities) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("entities", entities);
+        Map<String, Object> map = new HashMap<>();
+        List<ModelEntity> models = new ArrayList<>();
+        entities.forEach(entity -> models.add(new ModelEntity(entity)));
+        map.put("entities", models);
         return map;
+    }
+
+    static class ModelEntity extends HashMap<String, Object> {
+        ModelEntity(Entity entity) {
+            this.put("name", entity.getName());
+            List<ModelConnection> connections = new ArrayList<>();
+            entity.getConnections().forEach(connection -> connections.add(new ModelConnection(connection)));
+            this.put("connections", connections);
+        }
+    }
+
+    static class ModelConnection extends HashMap<String, Object> {
+        ModelConnection(Connection connection) {
+            this.put("direction", (connection.isTo() ? "to" : "from"));
+            if (connection.getLowerBound() == connection.getUpperBound()) {
+                this.put("single", true);
+                this.put("number", connection.getUpperBound());
+            } else {
+                this.put("single", false);
+                this.put("lowerBound", connection.getLowerBound()+"");
+                this.put("upperBound", (connection.getUpperBound()==-1 ? "" : connection.getUpperBound()));
+            }
+            List<String> targets = new ArrayList<>();
+            connection.getTarget().forEach(entity -> targets.add(entity.getName()));
+            this.put("targets", targets);
+        }
     }
 
 }

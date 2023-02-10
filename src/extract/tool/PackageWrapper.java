@@ -145,8 +145,8 @@ public class PackageWrapper {
         ));
         for (Entity entity : e) {
             entity.addConnection(new Connection(
-                    lowerBound,
-                    upperBound,
+                    1,
+                    1,
                     E,
                     false,
                     true
@@ -162,6 +162,7 @@ public class PackageWrapper {
      * @param e2 关系接收实体
      * @param lowerBound 下界
      * @param upperBound 上界
+     * @param relationName 引用关系名称
      */
     private void buildRelationConnection(Entity e1, List<Entity> e2, int lowerBound, int upperBound, String relationName) {
         EdgeEntity edge = new EdgeEntity(e1.getName() + "_" + relationName + "_Edge");
@@ -180,14 +181,14 @@ public class PackageWrapper {
                 false
         ));
         edge.addConnection(new Connection(
-                0,
+                1,
                 1,
                 e2,
                 true
         ));
         for (Entity entity : e2) {
             entity.addConnection(new Connection(
-                    0,
+                    1,
                     1,
                     edge,
                     false

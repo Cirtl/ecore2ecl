@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class Entity {
     private final String name;
-    private List<Connection> connections;
+    private final List<Connection> connections;
 
     public Entity(String name) {
         this.name = name;
@@ -14,6 +14,10 @@ public abstract class Entity {
 
     public String getName() {
         return name;
+    }
+
+    public List<Connection> getConnections() {
+        return connections;
     }
 
     public void addConnection(Connection connection) {
