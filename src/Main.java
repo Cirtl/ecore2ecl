@@ -2,6 +2,7 @@ import engine.FreeMarker;
 import extract.tool.PackageWrapper;
 import file.RecourceControl;
 
+import java.io.File;
 import java.util.Map;
 
 public class Main {
@@ -20,7 +21,7 @@ public class Main {
         Map<String, Object> map = wrapper.filterAllData();
 
         try {
-            FreeMarker.INSTANCE.generateEcl(map);
+            FreeMarker.INSTANCE.generateEcl(map, new File("src/test.ecl"));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             System.exit(0);
