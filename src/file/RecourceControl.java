@@ -28,8 +28,12 @@ public class RecourceControl {
 
         return new PackageWrapper(
                 (EPackage) this.set
-                    .getResource(URI.createURI(path), true)
+                    .getResource(URI.createFileURI(path), true)
                     .getContents().get(0)
         );
+    }
+
+    public static void main(String[] args) throws Exception {
+        SINGLETON.getEcore("D:/cirtl/user/project/ecore2ecl/resource/ecores/basicfamily.ecore");
     }
 }

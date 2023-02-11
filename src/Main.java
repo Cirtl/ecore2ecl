@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         PackageWrapper wrapper = null;
         try {
-            wrapper = RecourceControl.SINGLETON.getEcore("resource/ecores/basicfamily.ecore");
+            wrapper = RecourceControl.SINGLETON.getEcore("D:/cirtl/user/project/ecore2ecl/resource/ecores/basicfamily.ecore");
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             System.exit(0);
