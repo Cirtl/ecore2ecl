@@ -1,5 +1,5 @@
 import engine.FreeMarker;
-import extract.tool.PackageWrapper;
+import extract.tool.Wrapper;
 import file.RecourceControl;
 
 import java.io.File;
@@ -8,12 +8,11 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        PackageWrapper wrapper = null;
+        Wrapper wrapper = null;
         try {
             wrapper = RecourceControl.SINGLETON.getEcore("D:/cirtl/user/project/ecore2ecl/resource/ecores/basicfamily.ecore");
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
-            System.exit(0);
+            exception.printStackTrace();
         }
 
         assert wrapper != null;
