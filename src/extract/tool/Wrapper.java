@@ -105,13 +105,13 @@ public class Wrapper {
                 true
         ));
         edge.addConnection(new Connection(
-                1,
+                0,
                 1,
                 e1,
                 false
         ));
         edge.addConnection(new Connection(
-                1,
+                0,
                 1,
                 e2,
                 true
