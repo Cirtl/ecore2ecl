@@ -1,6 +1,6 @@
-import engine.FreeMarker;
-import extract.tool.Wrapper;
-import file.RecourceControl;
+import generator.FreeMarker;
+import process.wrapper.EEWrapper;
+import process.wrapper.WrapperFactory;
 
 import java.io.File;
 import java.util.Map;
@@ -8,9 +8,9 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        Wrapper wrapper = null;
+        EEWrapper wrapper = null;
         try {
-            wrapper = RecourceControl.SINGLETON.getEcore("D:/cirtl/user/project/ecore2ecl/resource/ecores/basicfamily.ecore");
+            wrapper = WrapperFactory.SINGLETON.createEEWrapper("D:/cirtl/user/project/ecore2ecl/resource/ecores/basicfamily.ecore");
         } catch (Exception exception) {
             exception.printStackTrace();
         }

@@ -1,8 +1,8 @@
 package applications;
 
-import engine.FreeMarker;
-import extract.tool.Wrapper;
-import file.RecourceControl;
+import generator.FreeMarker;
+import process.wrapper.EEWrapper;
+import process.wrapper.WrapperFactory;
 
 import java.io.File;
 
@@ -27,7 +27,7 @@ public class Config {
     }
 
     public void generateECLFile() throws Exception {
-        Wrapper wrapper = RecourceControl.SINGLETON.getEcore(this.inputPath);
+        EEWrapper wrapper = WrapperFactory.SINGLETON.createEEWrapper(this.inputPath);
         FreeMarker.INSTANCE.generateEcl(wrapper.filterAllData(), outputFile);
     }
 }
