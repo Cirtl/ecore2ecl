@@ -15,7 +15,7 @@ public class FreeMarker {
         this.cfg.setDefaultEncoding("UTF-8");
         this.cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         try {
-            this.cfg.setDirectoryForTemplateLoading(new File("process/templates"));
+            this.cfg.setDirectoryForTemplateLoading(new File(FreeMarker.class.getResource("../templates").getPath()));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             System.exit(0);
