@@ -1,6 +1,6 @@
 begin preamble
     semantic stdSem
-    visualization vizVisualization VIS ( starter , mono palette, color palette )
+    visualization vizVisualization VIS ( starter <#if starter??>${starter}</#if>, mono <#if mono??>${mono}</#if>, color <#if color??>${color}</#if> )
 end
 
 entities (<#list entities as entity>${entity.name}<#sep>, </#sep></#list>)

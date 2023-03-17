@@ -1,8 +1,13 @@
 package generator;
 
-import freemarker.template.*;
-import java.util.*;
-import java.io.*;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateExceptionHandler;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.Map;
 
 public class FreeMarker {
 
@@ -23,7 +28,13 @@ public class FreeMarker {
     }
 
     public void generateEcl(Map<String, Object> root, File outputFile) throws Exception {
-        Template template = this.cfg.getTemplate("test.ftl");
+        Template template = this.cfg.getTemplate("ecl.ftl");
+        Writer out = new FileWriter(outputFile);
+        template.process(root, out);
+    }
+
+    public void generateSSEcl(Map<String, Object> root, File outputFile) throws Exception {
+        Template template = this.cfg.getTemplate("ssecl.ftl");
         Writer out = new FileWriter(outputFile);
         template.process(root, out);
     }
