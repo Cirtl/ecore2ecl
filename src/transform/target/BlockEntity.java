@@ -1,24 +1,26 @@
-package transform.einfo;
+package transform.target;
+
+import transform.data.SimpleClass;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlockEntity extends Entity {
-    private final SimpleEClass simpleEClass;
+    private final SimpleClass simpleClass;
 
-    public BlockEntity(SimpleEClass simpleEClass) {
-        super(simpleEClass.getName());
-        this.simpleEClass = simpleEClass;
+    public BlockEntity(SimpleClass simpleClass) {
+        super(simpleClass.getName());
+        this.simpleClass = simpleClass;
     }
 
-    public SimpleEClass getSimpleEClass() {
-        return simpleEClass;
+    public SimpleClass getSimpleEClass() {
+        return simpleClass;
     }
 
     @Override
     public List<Connection> getConnections() {
         List<Connection> ret = new ArrayList<>(super.getConnections());
-        simpleEClass.getParents().forEach(parent -> {
+        simpleClass.getParents().forEach(parent -> {
             ret.addAll(parent.getSelfEntity().getConnections());
         });
         return ret;
@@ -26,10 +28,10 @@ public class BlockEntity extends Entity {
 
     public List<Entity> getAllFinalEntity() {
         List<Entity> ret = new ArrayList<>();
-        if (simpleEClass.getChildren().isEmpty()) {
+        if (simpleClass.getChildren().isEmpty()) {
             ret.add(this);
         } else {
-            simpleEClass.getFinalChildren().forEach(child -> {
+            simpleClass.getFinalChildren().forEach(child -> {
                 ret.add(child.getSelfEntity());
             });
         }

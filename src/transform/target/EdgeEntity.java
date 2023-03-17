@@ -1,4 +1,4 @@
-package transform.einfo;
+package transform.target;
 
 public class EdgeEntity extends Entity {
 

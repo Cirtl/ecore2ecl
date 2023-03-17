@@ -2,10 +2,11 @@ package process.wrapper;
 
 import transform.ClassesTree;
 import transform.Modeler;
-import transform.einfo.*;
+import transform.data.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import transform.target.*;
 
 import java.util.Map;
 
@@ -23,15 +24,20 @@ public class EEWrapper {
         this.eclModeler = new Modeler();
     }
 
+    /**
+     * 根据EClass对象找到对应的Entity对象
+     * @param target EClass目标
+     * @return 返回EClass对应的实体
+     */
     private Entity findBlockEntity(EClass target) {
         return tree.findSimpler(target).getSelfEntity();
     }
 
     private void filterBlockEntity() {
-        for (SimpleEClass simpleEClass : this.tree.getSimpleEClasses()) {
-            if (tree.canBeEntity(simpleEClass.getSelfEClass())) {
-                BlockEntity tmp = new BlockEntity(simpleEClass);
-                simpleEClass.setSelfEntity(tmp);
+        for (SimpleClass simpleClass : this.tree.getSimpleEClasses()) {
+            if (tree.canBeEntity(simpleClass.getSelfEClass())) {
+                BlockEntity tmp = new BlockEntity(simpleClass);
+                simpleClass.setSelfEntity(tmp);
                 eclModeler.getBlockEntities().add(tmp);
             }
         }

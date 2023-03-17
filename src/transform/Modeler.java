@@ -1,8 +1,8 @@
 package transform;
 
-import transform.einfo.BlockEntity;
-import transform.einfo.Entity;
-import transform.minfo.ModelEntity;
+import transform.target.BlockEntity;
+import transform.target.Entity;
+import transform.model.ModelEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Modeler {
     private final List<Entity> blockEntities;
-    private final List<Entity> assistEntities;
+    private final List<Entity> assistEntities;  // 辅助实体, 如 DiagramEntity
     private final List<Entity> edgeEntities;
 
     public Modeler() {

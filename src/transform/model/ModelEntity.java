@@ -1,6 +1,6 @@
-package transform.minfo;
+package transform.model;
 
-import transform.einfo.Entity;
+import transform.target.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

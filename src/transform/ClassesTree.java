@@ -1,9 +1,10 @@
 package transform;
 
-import transform.einfo.SimpleEClass;
+import transform.data.SimpleClass;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import transform.data.SourceData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,16 +13,17 @@ import java.util.Map;
 
 public class ClassesTree {
     private final EPackage ePackage;
-    private final Map<String, SimpleEClass> simpleEClassMap;
+    // name-SimpleClass 键值对
+    private final Map<String, SimpleClass> simpleClassMap;
     // 记录包中的类继承关系
     private final Map<String, List<EClass>> inherits;
-    private final List<SimpleEClass> simpleEClasses;
+    private final List<SimpleClass> simpleClasses;
 
     public ClassesTree(EPackage ePackage) {
         this.ePackage = ePackage;
         this.inherits = new HashMap<>();
-        this.simpleEClassMap = new HashMap<>();
-        this.simpleEClasses = new ArrayList<>();
+        this.simpleClassMap = new HashMap<>();
+        this.simpleClasses = new ArrayList<>();
         initInherits();
         initSimpleEClasses();
     }
@@ -39,28 +41,28 @@ public class ClassesTree {
 
     private void initSimpleEClasses() {
         for (EClass eClass : extractAllEClass()) {
-            simpleEClasses.add(simplifyEClass(eClass));
+            simpleClasses.add(simplifyEClass(eClass));
         }
-        for (SimpleEClass simpleEClass : simpleEClasses) {
-            if (inherits.containsKey(simpleEClass.getName())) {
-                for (EClass eClass : inherits.get(simpleEClass.getName())) {
-                    simpleEClass.getChildren().add(simpleEClassMap.get(eClass.getName()));
+        for (SimpleClass simpleClass : simpleClasses) {
+            if (inherits.containsKey(simpleClass.getName())) {
+                for (EClass eClass : inherits.get(simpleClass.getName())) {
+                    simpleClass.getChildren().add(simpleClassMap.get(eClass.getName()));
                 }
             }
         }
     }
 
-    private SimpleEClass simplifyEClass(EClass eClass) {
-        if (this.simpleEClassMap.containsKey(eClass.getName())) return this.simpleEClassMap.get(eClass.getName());
+    private SimpleClass simplifyEClass(EClass eClass) {
+        if (this.simpleClassMap.containsKey(eClass.getName())) return this.simpleClassMap.get(eClass.getName());
 
-        List<SimpleEClass> parents = new ArrayList<>();
+        List<SourceData> parents = new ArrayList<>();
         if (!eClass.getESuperTypes().isEmpty()) {
             for (EClass parent : eClass.getESuperTypes()) {
                 parents.add(simplifyEClass(parent));
             }
         }
-        SimpleEClass ret = new SimpleEClass(eClass, parents);
-        this.simpleEClassMap.put(eClass.getName(), ret);
+        SimpleClass ret = new SimpleClass(eClass, parents, eClass.isInterface());
+        this.simpleClassMap.put(eClass.getName(), ret);
         return ret;
     }
 
@@ -74,12 +76,12 @@ public class ClassesTree {
         return classes;
     }
 
-    public List<SimpleEClass> getSimpleEClasses() {
-        return simpleEClasses;
+    public List<SimpleClass> getSimpleEClasses() {
+        return simpleClasses;
     }
 
-    public SimpleEClass findSimpler(EClass eClass) {
-        return simpleEClassMap.get(eClass.getName());
+    public SimpleClass findSimpler(EClass eClass) {
+        return simpleClassMap.get(eClass.getName());
     }
 
     // 判断该类是否可实例化, 或者该类的子类中是否存在可实例化的类
