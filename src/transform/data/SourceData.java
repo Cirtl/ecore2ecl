@@ -1,15 +1,14 @@
 package transform.data;
 
 import transform.model.ModelAttribute;
-import transform.target.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SourceData {
     private final String name;
+    // 当且仅当在作为 parent 时起作用, 用于标志该对象属于 extends/implements
     private final boolean isInterface;
-    private Entity selfEntity;
     private List<ModelAttribute> attributes;
 
     private final List<SourceData> parents;
@@ -28,14 +27,6 @@ public abstract class SourceData {
 
     public boolean isInterface() {
         return isInterface;
-    }
-
-    public void setSelfEntity(Entity selfEntity) {
-        this.selfEntity = selfEntity;
-    }
-
-    public Entity getSelfEntity() {
-        return selfEntity;
     }
 
     public void setAttributes(List<ModelAttribute> attributes) {

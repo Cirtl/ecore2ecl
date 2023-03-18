@@ -1,6 +1,6 @@
 package transform.model;
 
-import transform.target.Entity;
+import transform.data.tmp.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package transform.model;
 
-import transform.target.Connection;
+import transform.data.tmp.Connection;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,27 +1,26 @@
 package process.wrapper;
 
-import transform.ClassesTree;
-import transform.Modeler;
+import transform.data.EGenealogy;
 import transform.data.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import transform.target.*;
+import transform.data.tmp.*;
 
 import java.util.Map;
 
 /**
- * Ecore file to ECL file
+ * Ecore file change to ECL file
  */
 public class EEWrapper {
     // 构建类继承树
-    private final ClassesTree tree;
+    private final EGenealogy genealogy;
     // 生成实体信息
-    private final Modeler eclModeler;
+    private final EEModeler eclModeler;
 
     public EEWrapper(EPackage ePackage) {
-        this.tree = new ClassesTree(ePackage);
-        this.eclModeler = new Modeler();
+        this.genealogy = new EGenealogy(ePackage);
+        this.eclModeler = new EEModeler();
     }
 
     /**
@@ -30,12 +29,12 @@ public class EEWrapper {
      * @return 返回EClass对应的实体
      */
     private Entity findBlockEntity(EClass target) {
-        return tree.findSimpler(target).getSelfEntity();
+        return genealogy.findSimpler(target).getSelfEntity();
     }
 
     private void filterBlockEntity() {
-        for (SimpleClass simpleClass : this.tree.getSimpleEClasses()) {
-            if (tree.canBeEntity(simpleClass.getSelfEClass())) {
+        for (SimpleClass simpleClass : this.genealogy.getSimpleEClasses()) {
+            if (genealogy.canBeEntity(simpleClass.getSelfEClass())) {
                 BlockEntity tmp = new BlockEntity(simpleClass);
                 simpleClass.setSelfEntity(tmp);
                 eclModeler.getBlockEntities().add(tmp);
@@ -47,7 +46,7 @@ public class EEWrapper {
         for (Entity entity : eclModeler.getBlockEntities()) {
             BlockEntity blockEntity = (BlockEntity) entity;
             for (EReference reference : blockEntity.getSimpleEClass().getReferences()) {
-                if (tree.canBeEntity(reference.getEReferenceType())) {
+                if (genealogy.canBeEntity(reference.getEReferenceType())) {
                     Entity target = findBlockEntity(reference.getEReferenceType());
                     if (reference.isContainment()) {
                         buildContainConnection(blockEntity, target, reference.getLowerBound(), reference.getUpperBound());

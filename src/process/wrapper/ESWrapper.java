@@ -1,15 +1,15 @@
 package process.wrapper;
 
 import org.eclipse.emf.ecore.EPackage;
-import transform.ClassesTree;
+import transform.data.EGenealogy;
 
 /**
  * Ecore file change to SS-ECL file
  */
 public class ESWrapper {
-    private ClassesTree tree;
+    private EGenealogy tree;
 
     public ESWrapper(EPackage ePackage) {
-        this.tree = new ClassesTree(ePackage);
+        this.tree = new EGenealogy(ePackage);
     }
 }

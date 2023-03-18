@@ -1,17 +1,15 @@
-package transform;
+package transform.data;
 
-import transform.data.SimpleClass;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import transform.data.SourceData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClassesTree {
+public class EGenealogy {
     private final EPackage ePackage;
     // name-SimpleClass 键值对
     private final Map<String, SimpleClass> simpleClassMap;
@@ -19,7 +17,7 @@ public class ClassesTree {
     private final Map<String, List<EClass>> inherits;
     private final List<SimpleClass> simpleClasses;
 
-    public ClassesTree(EPackage ePackage) {
+    public EGenealogy(EPackage ePackage) {
         this.ePackage = ePackage;
         this.inherits = new HashMap<>();
         this.simpleClassMap = new HashMap<>();

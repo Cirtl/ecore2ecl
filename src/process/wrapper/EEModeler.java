@@ -1,7 +1,7 @@
-package transform;
+package process.wrapper;
 
-import transform.target.BlockEntity;
-import transform.target.Entity;
+import transform.data.tmp.BlockEntity;
+import transform.data.tmp.Entity;
 import transform.model.ModelEntity;
 
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Modeler {
+public class EEModeler {
     private final List<Entity> blockEntities;
     private final List<Entity> assistEntities;  // 辅助实体, 如 DiagramEntity
     private final List<Entity> edgeEntities;
 
-    public Modeler() {
+    public EEModeler() {
         this.blockEntities = new ArrayList<>();
         this.assistEntities = new ArrayList<>();
         this.edgeEntities = new ArrayList<>();

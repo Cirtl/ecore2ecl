@@ -1,4 +1,4 @@
-package transform.target;
+package transform.data.tmp;
 
 import transform.data.SimpleClass;
 
@@ -21,7 +21,7 @@ public class BlockEntity extends Entity {
     public List<Connection> getConnections() {
         List<Connection> ret = new ArrayList<>(super.getConnections());
         simpleClass.getParents().forEach(parent -> {
-            ret.addAll(parent.getSelfEntity().getConnections());
+            ret.addAll(((SimpleClass)parent).getSelfEntity().getConnections());
         });
         return ret;
     }
@@ -32,7 +32,7 @@ public class BlockEntity extends Entity {
             ret.add(this);
         } else {
             simpleClass.getFinalChildren().forEach(child -> {
-                ret.add(child.getSelfEntity());
+                ret.add(((SimpleClass)child).getSelfEntity());
             });
         }
         return ret;
