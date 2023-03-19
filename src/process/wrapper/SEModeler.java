@@ -1,4 +1,11 @@
 package process.wrapper;
 
-public class SEModeler {
+import transform.model.EModel;
+
+public class SEModeler implements Modeler<EModel> {
+
+    @Override
+    public EModel modelingEntities() {
+        return null;
+    }
 }

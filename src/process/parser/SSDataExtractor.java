@@ -36,9 +36,10 @@ public class SSDataExtractor extends SSECLBaseListener {
     public void enterEntityDef(SSECLParser.EntityDefContext ctx) {
         // 获取实体继承属性
         List<String> parents = new ArrayList<>();
-        if (!ctx.acts.isEmpty()) ctx.acts.forEach(token -> parents.add(token.getText()));
-        genealogy.setInterface(parents);
         if (ctx.extend != null) parents.add(ctx.extend.getText());
+
+        List<String> elders = new ArrayList<>();
+        if (!ctx.acts.isEmpty()) ctx.acts.forEach(token -> elders.add(token.getText()));
 
         // 获取实体连接属性
         List<List<SSData.Connection>> connectionsGroups = new ArrayList<>();
@@ -63,10 +64,13 @@ public class SSDataExtractor extends SSECLBaseListener {
         SSData entity = new SSData(
                 ctx.name.getText(),
                 parents,
-                connectionsGroups,
-                ctx.function.content.getText(),
-                ctx.vis.content.getText()
+                elders,
+                connectionsGroups
         );
+
+        // 设置实体编辑器相关属性
+        entity.setFunctionsBlock(ctx.function.content.getText());
+        entity.setVisualizationBlock(ctx.vis.content.getText());
 
         // 设置实体属性
         List<ModelAttribute> attributes = new ArrayList<>();

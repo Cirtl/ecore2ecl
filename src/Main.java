@@ -17,7 +17,7 @@ public class Main {
 
         assert wrapper != null;
 
-        Map<String, Object> map = wrapper.filterAllData();
+        Map<String, Object> map = wrapper.buildModelData();
 
         try {
             FreeMarker.INSTANCE.generateEcl(map, new File("src/test.ecl"));

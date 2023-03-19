@@ -9,16 +9,24 @@ entities (<#list entities as entity>${entity.name}<#sep>, </#sep></#list>)
 begin ${entity.name}
     semantic s
 
+    <#list entity.connections_group as connections>
     begin connections
-    <#list entity.connections as connection>
-        connects ${connection.direction} <#if connection.single>${connection.number}<#else>${connection.lowerBound}..${connection.upperBound}</#if> (<#list connection.targets as target>${target}<#sep>, </#sep></#list>)
+    <#list connections as connection>
+        connects ${connection.direction} <#if connection.lowerBound==connection.upperBound>${connection.lowerBound}<#else>${connection.lowerBound}..<#if connection.upperBound!=-1>${connection.upperBound}</#if></#if> (<#list connection.targets as target>${target}<#sep>, </#sep></#list>)
     </#list>
     end
-
+    </#list>
+    <#if (entity.funcs)??>
+    <#list entity.funcs as func>
+    ${func}
+    </#list>
+    </#if>
     begin visualization VIS
-        renders
-        layout
-        enable ()
+        <#if (entity.vis_list)??>
+        <#list entity.vis_list as vis>
+        ${vis}
+        </#list>
+        </#if>
     end
 end
 

@@ -1,12 +1,15 @@
 package process.parser;
 
+import generator.FreeMarker;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import process.parser.SSECL.SSECLLexer;
 import process.parser.SSECL.SSECLParser;
+import process.wrapper.SEWrapper;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -24,6 +27,10 @@ public class TestParser {
         SSDataExtractor extractor = new SSDataExtractor();
         walker.walk(extractor, tree);
 
-        System.out.println(tree.toStringTree(parser));
+//        System.out.println(tree.toStringTree(parser));
+
+        SEWrapper wrapper = new SEWrapper(extractor.getGenealogy());
+        FreeMarker.INSTANCE.generateEcl(wrapper.buildModelData(), new File("C:\\Users\\86186\\Desktop\\test\\t.ecl"));
+        ;
     }
 }

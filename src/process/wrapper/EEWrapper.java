@@ -134,7 +134,7 @@ public class EEWrapper {
         ));
     }
 
-    public Map<String, Object> filterAllData() {
+    public Map<String, Object> buildModelData() {
         filterBlockEntity();
         filterRelationEntity();
         return eclModeler.modelingEntities();

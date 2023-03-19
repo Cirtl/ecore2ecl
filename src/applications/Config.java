@@ -28,6 +28,6 @@ public class Config {
 
     public void generateECLFile() throws Exception {
         EEWrapper wrapper = WrapperFactory.SINGLETON.createEEWrapper(this.inputPath);
-        FreeMarker.INSTANCE.generateEcl(wrapper.filterAllData(), outputFile);
+        FreeMarker.INSTANCE.generateEcl(wrapper.buildModelData(), outputFile);
     }
 }
