@@ -16,14 +16,11 @@ public abstract class SourceData {
         this.name = name;
         this.parents = parents;
         this.children = new ArrayList<>();
+        this.attributes = new ArrayList<>();
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setAttributes(List<ModelAttribute> attributes) {
-        this.attributes = attributes;
     }
 
     public List<SourceData> getParents() {
@@ -50,7 +47,31 @@ public abstract class SourceData {
         return ret;
     }
 
+    public void setAttributes(List<ModelAttribute> attributes) {
+        this.attributes = attributes;
+    }
+
     public List<ModelAttribute> getAttributes() {
         return attributes;
+    }
+
+    /**
+     * @return 该类的全部属性
+     */
+    public List<ModelAttribute> getAllAttributes() {
+        List<ModelAttribute> ret = new ArrayList<>(this.attributes);
+        if(!this.parents.isEmpty()) {
+            for (ModelAttribute attr: this.parents.get(0).getAllAttributes()) {
+                boolean insert = true;
+                for (ModelAttribute comp: this.attributes) {
+                    if (attr.getName().equals(comp.getName())) {
+                        insert = false;
+                        break;
+                    }
+                }
+                if (insert) ret.add(attr);
+            }
+        }
+        return ret;
     }
 }

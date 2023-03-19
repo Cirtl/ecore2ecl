@@ -29,6 +29,9 @@ public class ESModeler implements Modeler<Model> {
 
     @Override
     public Model modelingEntities() {
+        for (SSData entity: this.entities.values()) {
+            entity.rebuild(this.entities);
+        }
         Model model = new Model();
         model.setEntityList(modeling());
         return model;

@@ -30,7 +30,7 @@ public class ModelEntity extends HashMap<String, Object> {
 
         if (entity.getFunctionsBlock() != null) this.put(FUNCTION_LIST, entity.getFunctionsBlock());
         if (entity.getVisualizationBlock() != null) this.put(VISUALIZATION_LIST, entity.getVisualizationBlock());
-        if (entity.getAttributes() != null) this.put(ATTR_LIST, entity.getAttributes());
+        if (!entity.getAllAttributes().isEmpty()) this.put(ATTR_LIST, entity.getAllAttributes());
 
         List<List<ModelConnection>> group = new ArrayList<>();
         List<ModelConnection> tmp;

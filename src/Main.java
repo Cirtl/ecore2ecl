@@ -29,7 +29,7 @@ public class Main {
 
                 Model model0 = wrapper0.buildModelData();
                 try {
-                    FreeMarker.INSTANCE.generateSSEcl(model0, new File("C:\\Users\\86186\\Desktop\\test\\test.ssecl"));
+                    FreeMarker.INSTANCE.generateSSEcl(model0, new File("src/test.ssecl"));
                 } catch (Exception exception) {
                     System.out.println(exception.getMessage());
                     System.exit(0);
