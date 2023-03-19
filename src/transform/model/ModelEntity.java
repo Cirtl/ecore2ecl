@@ -14,6 +14,7 @@ public class ModelEntity extends HashMap<String, Object> {
     // optional
     public static final String FUNCTION_LIST = "funcs";
     public static final String VISUALIZATION_LIST = "vis_list";
+    public static final String ATTR_LIST = "attributes";
 
     public ModelEntity(Entity entity) {
         this.put(NAME, entity.getName());
@@ -29,10 +30,11 @@ public class ModelEntity extends HashMap<String, Object> {
 
         if (entity.getFunctionsBlock() != null) this.put(FUNCTION_LIST, entity.getFunctionsBlock());
         if (entity.getVisualizationBlock() != null) this.put(VISUALIZATION_LIST, entity.getVisualizationBlock());
+        if (entity.getAttributes() != null) this.put(ATTR_LIST, entity.getAttributes());
 
         List<List<ModelConnection>> group = new ArrayList<>();
         List<ModelConnection> tmp;
-        for (List<SSData.Connection> connections: entity.getConnectionGroups()) {
+        for (List<SSData.Connection> connections: entity.getFinalConnectionGroups()) {
             tmp = new ArrayList<>();
             for (SSData.Connection connection: connections) {
                 tmp.add(new ModelConnection(connection));

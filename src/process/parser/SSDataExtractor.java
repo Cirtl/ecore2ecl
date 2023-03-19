@@ -42,9 +42,9 @@ public class SSDataExtractor extends SSECLBaseListener {
         if (!ctx.acts.isEmpty()) ctx.acts.forEach(token -> elders.add(token.getText()));
 
         // 获取实体连接属性
-        List<List<SSData.Connection>> connectionsGroups = new ArrayList<>();
+        List<SSData.ConnectionGroup> connectionsGroups = new ArrayList<>();
         ctx.connections.forEach(connectionDefContext -> {
-            List<SSData.Connection> group = new ArrayList<>();
+            SSData.ConnectionGroup group = new SSData.ConnectionGroup(connectionDefContext.name.getText());
             connectionDefContext.connections.forEach(singleConnectionContext -> {
                 List<String> targets = new ArrayList<>();
                 singleConnectionContext.targets.forEach(target -> targets.add(target.getText()));

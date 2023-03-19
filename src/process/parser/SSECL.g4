@@ -39,7 +39,7 @@ attributeDef:
 ;
 
 connectionDef:
-    'connections' '{'
+    'connections' name=ID '{'
         (
         connections+=connection  (SEQ
         connections+=connection)* SEQ?

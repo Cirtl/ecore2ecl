@@ -1,7 +1,7 @@
 package process.wrapper;
 
 import transform.data.SGenealogy;
-import transform.model.EModel;
+import transform.model.Model;
 import transform.model.ModelEntity;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * SS-ECL file change to ECL file
  */
-public class SEWrapper implements Modeler<EModel> {
+public class SEWrapper implements Modeler<Model> {
     private final SGenealogy genealogy;
 
     public SEWrapper(SGenealogy genealogy) {
@@ -27,8 +27,8 @@ public class SEWrapper implements Modeler<EModel> {
     }
 
     @Override
-    public EModel modelingEntities() {
-        EModel model = new EModel();
+    public Model modelingEntities() {
+        Model model = new Model();
         model.setStarter(genealogy.config.getStarter());
         model.setMono(genealogy.config.getMono());
         model.setColor(genealogy.config.getColor());
@@ -36,7 +36,7 @@ public class SEWrapper implements Modeler<EModel> {
         return model;
     }
 
-    public EModel buildModelData() {
+    public Model buildModelData() {
         return this.modelingEntities();
     }
 }

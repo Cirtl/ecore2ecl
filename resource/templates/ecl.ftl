@@ -21,6 +21,7 @@ begin ${entity.name}
     ${func}
     </#list>
     </#if>
+
     begin visualization VIS
         <#if (entity.vis_list)??>
         <#list entity.vis_list as vis>

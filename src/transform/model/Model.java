@@ -3,7 +3,7 @@ package transform.model;
 import java.util.HashMap;
 import java.util.List;
 
-public class EModel extends HashMap<String, Object> {
+public class Model extends HashMap<String, Object> {
     public static final String STARTER = "starter";
     public static final String MONO = "mono";
     public static final String COLOR = "color";

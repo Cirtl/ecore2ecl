@@ -2,12 +2,11 @@ package process.wrapper;
 
 import transform.data.tmp.BlockEntity;
 import transform.data.tmp.Entity;
+import transform.model.Model;
 import transform.model.ModelEntity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class EEModeler {
     private final List<Entity> blockEntities;
@@ -32,17 +31,17 @@ public class EEModeler {
         return edgeEntities;
     }
 
-    public Map<String, Object> modelingEntities() {
-        Map<String, Object> map = new HashMap<>();
-        List<ModelEntity> models = new ArrayList<>();
+    public Model modelingEntities() {
+        Model model = new Model();
+        List<ModelEntity> entities = new ArrayList<>();
         blockEntities.forEach(entity -> {
             if (((BlockEntity)entity).getSimpleEClass().getChildren().isEmpty()) {
-                models.add(new ModelEntity(entity));
+                entities.add(new ModelEntity(entity));
             }
         });
-        assistEntities.forEach(entity -> models.add(new ModelEntity(entity)));
-        edgeEntities.forEach(entity -> models.add(new ModelEntity(entity)));
-        map.put("entities", models);
-        return map;
+        assistEntities.forEach(entity -> entities.add(new ModelEntity(entity)));
+        edgeEntities.forEach(entity -> entities.add(new ModelEntity(entity)));
+        model.setEntityList(entities);
+        return model;
     }
 }
