@@ -1,11 +1,13 @@
 package process.wrapper;
 
 import transform.data.SGenealogy;
+import transform.data.SSData;
 import transform.model.Model;
 import transform.model.ModelEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * SS-ECL file change to ECL file
@@ -20,8 +22,8 @@ public class SEWrapper implements Modeler<Model> {
 
     private List<ModelEntity> modeling() {
         List<ModelEntity> list = new ArrayList<>();
-        for (String name: this.genealogy.getValidEntitySet()) {
-            list.add(new ModelEntity(this.genealogy.getEntityMap().get(name)));
+        for (SSData data: this.genealogy.getValidEntitySet()) {
+            list.add(new ModelEntity(data, true));
         }
         return list;
     }
@@ -38,5 +40,9 @@ public class SEWrapper implements Modeler<Model> {
 
     public Model buildModelData() {
         return this.modelingEntities();
+    }
+
+    public Set<SSData> entitySet() {
+        return this.genealogy.getValidEntitySet();
     }
 }

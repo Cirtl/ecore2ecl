@@ -25,10 +25,10 @@ public class SGenealogy {
         }
     }
 
-    public Set<String> getValidEntitySet() {
-        Set<String> ret = new HashSet<>();
+    public Set<SSData> getValidEntitySet() {
+        Set<SSData> ret = new HashSet<>();
         for (String name: this.entitySet) {
-            if (this.getEntityMap().get(name).getChildren().isEmpty()) ret.add(name);
+            if (this.entityMap.get(name).getChildren().isEmpty()) ret.add(this.entityMap.get(name));
         }
         return ret;
     }

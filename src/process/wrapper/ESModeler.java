@@ -23,7 +23,7 @@ public class ESModeler implements Modeler<Model> {
 
     private List<ModelEntity> modeling() {
         List<ModelEntity> list = new ArrayList<>();
-        entities.values().forEach(entity -> list.add(new ModelEntity(entity)));
+        entities.values().forEach(entity -> list.add(new ModelEntity(entity, false)));
         return list;
     }
 

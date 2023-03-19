@@ -164,7 +164,11 @@ public class SSData extends SourceData{
             return isTo;
         }
 
-        public List<SourceData> getTargets() {
+        public List<SSData> getTargets() {
+            return this.targets;
+        }
+
+        public List<SourceData> getAllTargets() {
             List<SourceData> ret = new ArrayList<>();
             for (SSData entity: this.targets) {
                 if (entity.getChildren().isEmpty()) ret.add(entity);

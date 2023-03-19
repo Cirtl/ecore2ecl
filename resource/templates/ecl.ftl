@@ -9,9 +9,9 @@ entities (<#list entities as entity>${entity.name}<#sep>, </#sep></#list>)
 begin ${entity.name}
     semantic s
 
-    <#list entity.connections_group as connections>
+    <#list entity.connections_group as group>
     begin connections
-    <#list connections as connection>
+    <#list group.connections as connection>
         connects ${connection.direction} <#if connection.lowerBound==connection.upperBound>${connection.lowerBound}<#else>${connection.lowerBound}..<#if connection.upperBound!=-1>${connection.upperBound}</#if></#if> (<#list connection.targets as target>${target}<#sep>, </#sep></#list>)
     </#list>
     end
