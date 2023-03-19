@@ -40,11 +40,11 @@ public class ModelEntity extends HashMap<String, Object> {
         List<ModelConnectionGroup> groupList = new ArrayList<>();
         if (forECL) {
             for (SSData.ConnectionGroup group : entity.getFinalConnectionGroups()) {
-                groupList.add(new ModelConnectionGroup(group));
+                groupList.add(new ModelConnectionGroup(group, forECL));
             }
         } else {
             for (SSData.ConnectionGroup group : entity.refConnectionGroups()) {
-                groupList.add(new ModelConnectionGroup(group));
+                groupList.add(new ModelConnectionGroup(group, forECL));
             }
         }
         this.put(CONNECTIONS_GROUP, groupList);

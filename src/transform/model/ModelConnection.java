@@ -26,13 +26,17 @@ public class ModelConnection extends HashMap<String, Object> {
         this.put(TARGETS, targets);
     }
 
-    public ModelConnection(SSData.Connection connection) {
+    public ModelConnection(SSData.Connection connection, boolean forEcl) {
         this.put(DIRECTION, (connection.isTo() ? TO : FROM));
         this.put(L_BOUND, connection.getLowerBound());
         this.put(U_BOUND, connection.getUpperBound());
 
         List<String> targets = new ArrayList<>();
-        connection.getTargets().forEach(entity -> targets.add(entity.getName()));
+        if (forEcl) {
+            connection.getFinalTargets().forEach(entity -> targets.add(entity.getName()));
+        } else {
+            connection.getTargets().forEach(entity -> targets.add(entity.getName()));
+        }
         this.put(TARGETS, targets);
     }
 }
