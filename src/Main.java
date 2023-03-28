@@ -1,31 +1,38 @@
 import generator.AttributeXMLGenerator;
 import generator.FreeMarker;
-import process.wrapper.EEWrapper;
 import process.wrapper.ESWrapper;
 import process.wrapper.SEWrapper;
 import process.wrapper.WrapperFactory;
 import transform.model.Model;
 
 import java.io.File;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
-
+    // 0 for e2s; 1 for s2e; no e2e
     private static final int E2S = 0;
     private static final int S2E = 1;
     private static final int E2E = 2;
 
-    public static void main(String[] args) throws Exception {
-        // 0 for e2s; 1 for s2e; 2 for e2e
-        Scanner scanner = new Scanner(System.in);
-        int type = scanner.nextInt();
+    /**
+     * @param args 0 locate transformation type; 1 locate the input file path; the output files will generated in the same folder of the input file
+     */
+    public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("参数数量错误!");
+            System.exit(0);
+        }
+
+        String arg1 = args[0], inputPath = args[1];
+        System.out.println(arg1);
+        System.out.println(inputPath);
+
+        int type = Integer.parseInt(arg1);
 
         switch (type) {
-            case E2S:
+            case E2S: {
                 ESWrapper wrapper0 = null;
                 try {
-                    wrapper0 = WrapperFactory.SINGLETON.createESWrapper("C:\\Users\\86186\\Desktop\\test\\basicfamily.ecore");
+                    wrapper0 = WrapperFactory.SINGLETON.createESWrapper(inputPath);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -34,16 +41,17 @@ public class Main {
 
                 Model model0 = wrapper0.buildModelData();
                 try {
-                    FreeMarker.INSTANCE.generateSSEcl(model0, new File("C:\\Users\\86186\\Desktop\\test\\basicfamily.ssecl"));
+                    String outputPath = inputPath.substring(0, inputPath.lastIndexOf('.')) + ".ssecl";
+                    FreeMarker.INSTANCE.generateSSEcl(model0, new File(outputPath));
                 } catch (Exception exception) {
-                    System.out.println(exception.getMessage());
-                    System.exit(0);
+                    exception.printStackTrace();
                 }
                 break;
-            case S2E:
+            }
+            case S2E: {
                 SEWrapper wrapper1 = null;
                 try {
-                    wrapper1 = WrapperFactory.SINGLETON.createSEWrapper("C:\\Users\\86186\\Desktop\\test\\full-basicfamily.ssecl");
+                    wrapper1 = WrapperFactory.SINGLETON.createSEWrapper(inputPath);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -52,31 +60,18 @@ public class Main {
 
                 Model model1 = wrapper1.buildModelData();
                 try {
-                    FreeMarker.INSTANCE.generateEcl(model1, new File("C:\\Users\\86186\\Desktop\\test\\full-basicfamily.ecl"));
-                    AttributeXMLGenerator.INSTANCE.generateXML(wrapper1.entitySet(), "C:\\Users\\86186\\Desktop\\test\\full-basicfamily.xml");
-                } catch (Exception exception) {
-                    System.out.println(exception.getMessage());
-                    System.exit(0);
-                }
-                break;
-            case E2E:
-                EEWrapper wrapper2 = null;
-                try {
-                    wrapper2 = WrapperFactory.SINGLETON.createEEWrapper("C:\\Users\\86186\\Desktop\\test\\basicfamily.ecore");
+                    String outputPath = inputPath.substring(0, inputPath.lastIndexOf('.')) + ".ecl";
+                    String attrPath = inputPath.substring(0, inputPath.lastIndexOf('.')) + ".xml";
+                    FreeMarker.INSTANCE.generateEcl(model1, new File(outputPath));
+                    AttributeXMLGenerator.INSTANCE.generateXML(wrapper1.entitySet(), attrPath);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-
-                assert wrapper2 != null;
-
-                Map<String, Object> model3 = wrapper2.buildModelData();
-                try {
-                    FreeMarker.INSTANCE.generateEcl(model3, new File("C:\\Users\\86186\\Desktop\\test\\basicfamily.ecl"));
-                } catch (Exception exception) {
-                    System.out.println(exception.getMessage());
-                    System.exit(0);
-                }
                 break;
+            }
+            default: {
+                System.out.println("The input type function not exist.");
+            }
         }
 
     }

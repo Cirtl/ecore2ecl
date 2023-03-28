@@ -39,17 +39,4 @@ public class AttributeXMLGenerator {
         writer.write(document);
         writer.close();
     }
-
-    public static void main(String[] args) throws Exception {
-        Document document = DocumentHelper.createDocument();
-        Element booksElement = document.addElement("books");
-        booksElement.addComment("This is a test for dom4j, cirtl, 2023.3.14");
-        Element bookElement = booksElement.addElement("book");
-        bookElement.addAttribute("show", "yes");
-        Element titleElement = bookElement.addElement("title");
-        titleElement.setText("Dom4j Tutorials");
-        XMLWriter writer = new XMLWriter(new FileWriter("src/test2.xml"));
-        writer.write(document);
-        writer.close();
-    }
 }

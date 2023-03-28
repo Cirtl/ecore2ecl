@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="ecore2ecl:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ecore2ecl_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ecore2ecl.jar">
+        <element id="module-output" name="ecore2ecl" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/../../jars/freemarker.jar" />
+      <element id="library" level="project" name="emf.ecore" />
+      <element id="file-copy" path="$PROJECT_DIR$/../../jars/dom4j-2.1.4.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/../../jars/antlr-intellij-plugin-v4/lib/antlr4-runtime-4.11.1.jar" />
+    </root>
+  </artifact>
+</component>
