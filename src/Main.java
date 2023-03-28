@@ -11,7 +11,6 @@ public class Main {
     // 0 for e2s; 1 for s2e; no e2e
     private static final int E2S = 0;
     private static final int S2E = 1;
-    private static final int E2E = 2;
 
     /**
      * @param args 0 locate transformation type; 1 locate the input file path; the output files will generated in the same folder of the input file
@@ -23,8 +22,8 @@ public class Main {
         }
 
         String arg1 = args[0], inputPath = args[1];
-        System.out.println(arg1);
-        System.out.println(inputPath);
+
+        FreeMarker.init();
 
         int type = Integer.parseInt(arg1);
 

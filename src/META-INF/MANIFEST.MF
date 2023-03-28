@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: Main
+Class-Path: antlr4-runtime-4.11.1.jar freemarker.jar dom4j-2.1.4.jar org
+ .eclipse.emf.common_2.17.0.v20190920-0401.jar org.eclipse.emf.ecore.cha
+ nge_2.14.0.v20190528-0725.jar org.eclipse.emf.ecore.edit_2.13.0.v201908
+ 22-1451.jar org.eclipse.emf.ecore.xmi_2.16.0.v20190528-0725.jar org.ecl
+ ipse.emf.ecore_2.20.0.v20190920-0401.jar
+
