@@ -25,9 +25,6 @@ public class WrapperFactory {
     // 管理 Ecore 文件资源
     private final ResourceSet set;
 
-    // 负责 SS-ECL 的解析
-
-
     private WrapperFactory() {
         this.set = new ResourceSetImpl();
         this.set.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
@@ -58,7 +55,4 @@ public class WrapperFactory {
         return new SEWrapper(extractor.getGenealogy());
     }
 
-    public EEWrapper createEEWrapper(String path) throws Exception {
-        return new EEWrapper(getEcore(path));
-    }
 }

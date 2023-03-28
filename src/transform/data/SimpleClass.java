@@ -2,7 +2,6 @@ package transform.data;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
-import transform.data.tmp.Entity;
 import transform.model.ModelAttribute;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class SimpleClass extends SourceData {
 
     // 保存并处理得到实体间连接关系的 domain
     private final EClass selfEClass;
-    private Entity selfEntity;
 
     public SimpleClass(EClass eClass, List<SourceData> parents, boolean isInterface) {
         super(eClass.getName(), parents);
@@ -37,14 +35,6 @@ public class SimpleClass extends SourceData {
 
     public EClass getSelfEClass() {
         return selfEClass;
-    }
-
-    public void setSelfEntity(Entity selfEntity) {
-        this.selfEntity = selfEntity;
-    }
-
-    public Entity getSelfEntity() {
-        return selfEntity;
     }
 
     public List<EReference> getReferences() {

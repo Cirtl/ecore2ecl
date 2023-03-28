@@ -1,7 +1,6 @@
 package transform.model;
 
 import transform.data.SSData;
-import transform.data.tmp.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,15 +17,6 @@ public class ModelEntity extends HashMap<String, Object> {
     private static final String EXTEND = "extend";
     private static final String ACTS = "acts";
 
-    public ModelEntity(Entity entity) {
-        this.put(NAME, entity.getName());
-        List<List<ModelConnection>> group = new ArrayList<>();
-        List<ModelConnection> connections = new ArrayList<>();
-        entity.getConnections().forEach(connection -> connections.add(new ModelConnection(connection)));
-        group.add(connections);
-        this.put(CONNECTIONS_GROUP, group);
-    }
-
     public ModelEntity(SSData entity, boolean forECL) {
         this.put(NAME, entity.getName());
 
@@ -40,11 +30,11 @@ public class ModelEntity extends HashMap<String, Object> {
         List<ModelConnectionGroup> groupList = new ArrayList<>();
         if (forECL) {
             for (SSData.ConnectionGroup group : entity.getFinalConnectionGroups()) {
-                groupList.add(new ModelConnectionGroup(group, forECL));
+                groupList.add(new ModelConnectionGroup(group, true));
             }
         } else {
             for (SSData.ConnectionGroup group : entity.refConnectionGroups()) {
-                groupList.add(new ModelConnectionGroup(group, forECL));
+                groupList.add(new ModelConnectionGroup(group, false));
             }
         }
         this.put(CONNECTIONS_GROUP, groupList);
